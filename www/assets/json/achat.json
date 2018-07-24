@@ -1,0 +1,14 @@
+[
+  {
+    "productId": "pack0001_londres",
+    "title": "Londres",
+    "description": "Voyages en images à Londres",
+    "price": "1,49€"
+  },
+  {
+    "productId": "pack0002_bangkok",
+    "title": "Bangkok",
+    "description": "Voyages en images à Bangkok",
+    "price": "1,49€"
+  }
+]
