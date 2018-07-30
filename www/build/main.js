@@ -124,12 +124,13 @@ var HomePage = /** @class */ (function () {
                     storage.set('firstLaunch', true);
                     //détection de la langue
                     if (window.cordova) {
+                        alert('window.cordova');
                         _this.globalization.getPreferredLanguage().then(function (result) {
                             var res = result.value.split("-");
                             //verif si existe dans liste des langues (interne)
                             _this.checkLanguage(res[0]);
                             alert(result.value + ' ' + res[0]);
-                        });
+                        }).catch(function (e) { return alert(e); });
                     }
                     else {
                         _this.checkLanguage(__WEBPACK_IMPORTED_MODULE_9__app_app_settings__["a" /* appSettings */].LANGUAGE_DEFAULT);
