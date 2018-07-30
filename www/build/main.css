@@ -25768,6 +25768,16 @@ page-home .slogan {
   bottom: 60px;
 }
 
+page-home .catLabel {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+page-home ion-col {
+  overflow: hidden;
+}
+
 .flagContent {
   background-color: #6284A3;
   color: #f4f4f4;

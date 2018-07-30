@@ -133,17 +133,14 @@ var HomePage = /** @class */ (function () {
         this.picPage = __WEBPACK_IMPORTED_MODULE_4__pic_pic__["a" /* PicPage */];
         storage.ready().then(function () {
             storage.get('firstLaunch').then(function (val) {
-                alert('firstLaunch : ' + val);
                 if (!val || val === null) {
                     storage.set('firstLaunch', true);
                     //détection de la langue
                     if (window.cordova) {
-                        alert('window.cordova');
                         _this.globalization.getPreferredLanguage().then(function (result) {
                             var res = result.value.split("-");
                             //verif si existe dans liste des langues (interne)
                             _this.checkLanguage(res[0]);
-                            alert(result.value + ' ' + res[0]);
                         }).catch(function (e) { return alert(e); });
                     }
                     else {
@@ -152,7 +149,6 @@ var HomePage = /** @class */ (function () {
                 }
                 else {
                     storage.get('lang').then(function (val) {
-                        alert('firstLaunchElse : ' + val);
                         translate.use(val);
                     });
                 }
@@ -162,13 +158,11 @@ var HomePage = /** @class */ (function () {
         });
     }
     HomePage.prototype.checkLanguage = function (lang) {
-        alert('checkLanguage ' + lang);
         var founded = false;
         for (var i = 0; i < __WEBPACK_IMPORTED_MODULE_9__app_app_settings__["a" /* appSettings */].LANGUAGE_LIST.length; i++) {
             if (__WEBPACK_IMPORTED_MODULE_9__app_app_settings__["a" /* appSettings */].LANGUAGE_LIST[i] === lang) {
                 this.storage.set('lang', lang);
                 this.translate.use(lang);
-                alert('use ' + lang);
                 founded = true;
                 break;
             }
@@ -195,17 +189,6 @@ var HomePage = /** @class */ (function () {
             "pageId": pageId,
         });
     };
-    HomePage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad HomePage');
-    };
-    HomePage.prototype.showAlert = function () {
-        var alert = this.alertCtrl.create({
-            title: 'Hoooo!',
-            subTitle: 'Faut pas déconner non plus, j\'ai pas pas codé ça! Clique sur OK pour valider ton vote pour Damien pour le shérif du mois de Mars!',
-            buttons: ['OK']
-        });
-        alert.present();
-    };
     HomePage.prototype.goToExternalLink = function (param) {
         var link;
         switch (param) {
@@ -229,11 +212,12 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/damien/app/WT/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>\n      <img class="logo" src="assets/logo.png">\n    </ion-title>\n    <ion-buttons end>\n      <button ion-button icon-only (click)="openModal()" color="light">\n        <ion-icon name="settings"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content text-center>\n<div *ngIf="!loaded" style="padding:50px"><ion-spinner></ion-spinner></div>\n<div *ngIf="loaded">\n  <ion-grid>\n  <!-- <ion-row>\n    <ion-col width-33 [navPush]="picPage" ><ion-icon name="heart"></ion-icon></ion-col>\n    <ion-col width-33><ion-icon [name]="myIcon"></ion-icon></ion-col>\n    <ion-col width-33>CAT 3</ion-col>\n  </ion-row> -->\n  <ion-row>\n  		<ion-col width-33 (tap)="goToPicPage(0)"><img [src]="cats[0].image"><div>{{cats[0].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(1)"><img [src]="cats[1].image"><div>{{cats[1].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(2)"><img [src]="cats[2].image"><div>{{cats[2].name|translate}}</div></ion-col>\n  </ion-row>\n  <ion-row>\n  		<ion-col width-33 (tap)="goToPicPage(3)"><img [src]="cats[3].image"><div>{{cats[3].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(4)"><img [src]="cats[4].image"><div>{{cats[4].name|translate}}</div></ion-col>\n      <ion-col width-33></ion-col>\n  		<!-- <ion-col width-33 [navPush]="achatPage" tappable><img src="assets/img/achat.png"><div>Achats intégrés</div></ion-col> -->\n  </ion-row>\n      <!-- <ion-list>\n      <button ion-item *ngFor="let pic of cats" (click)="openPage(p)">\n      {{pic.name}}\n      </button>\n    </ion-list> -->\n</ion-grid>\n\n</div>\n<div padding class="slogan">{{\'SLOGAN1\' | translate}}<br><br>{{\'SLOGAN2\' | translate}}</div>\n <ion-fab right bottom>\n    <button ion-fab color="primary"><ion-icon name="ios-at-outline"></ion-icon></button>\n    <ion-fab-list side="left">\n      <button (click)="goToExternalLink(\'F\')" ion-fab><ion-icon name="logo-facebook"></ion-icon></button>\n      <button (click)="goToExternalLink(\'T\')" ion-fab><ion-icon name="logo-twitter"></ion-icon></button>\n      <button (click)="goToExternalLink(\'I\')" ion-fab><ion-icon name="logo-instagram"></ion-icon></button>\n      <button (click)="goToExternalLink(\'M\')" ion-fab><ion-icon name="ios-mail-outline"></ion-icon></button>\n    </ion-fab-list>\n  </ion-fab>\n</ion-content>\n'/*ion-inline-end:"/Users/damien/app/WT/src/pages/home/home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"/Users/damien/app/WT/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>\n      <img class="logo" src="assets/logo.png">\n    </ion-title>\n    <ion-buttons end>\n      <button ion-button icon-only (click)="openModal()" color="light">\n        <ion-icon name="settings"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content text-center>\n<div *ngIf="!loaded" style="padding:50px"><ion-spinner></ion-spinner></div>\n<div *ngIf="loaded">\n  <ion-grid>\n  <!-- <ion-row>\n    <ion-col width-33 [navPush]="picPage" ><ion-icon name="heart"></ion-icon></ion-col>\n    <ion-col width-33><ion-icon [name]="myIcon"></ion-icon></ion-col>\n    <ion-col width-33>CAT 3</ion-col>\n  </ion-row> -->\n  <ion-row>\n  		<ion-col width-33 (tap)="goToPicPage(0)"><img [src]="cats[0].image"><div class="catLabel">{{cats[0].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(1)"><img [src]="cats[1].image"><div class="catLabel">{{cats[1].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(2)"><img [src]="cats[2].image"><div class="catLabel">{{cats[2].name|translate}}</div></ion-col>\n  </ion-row>\n  <ion-row>\n  		<ion-col width-33 (tap)="goToPicPage(3)"><img [src]="cats[3].image"><div class="catLabel">{{cats[3].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(4)"><img [src]="cats[4].image"><div class="catLabel">{{cats[4].name|translate}}</div></ion-col>\n      <ion-col width-33></ion-col>\n  		<!-- <ion-col width-33 [navPush]="achatPage" tappable><img src="assets/img/achat.png"><div>Achats intégrés</div></ion-col> -->\n  </ion-row>\n      <!-- <ion-list>\n      <button ion-item *ngFor="let pic of cats" (click)="openPage(p)">\n      {{pic.name}}\n      </button>\n    </ion-list> -->\n</ion-grid>\n\n</div>\n<div padding class="slogan">{{\'SLOGAN1\' | translate}}<br><br>{{\'SLOGAN2\' | translate}}</div>\n <ion-fab right bottom>\n    <button ion-fab color="primary"><ion-icon name="ios-at-outline"></ion-icon></button>\n    <ion-fab-list side="left">\n      <button (click)="goToExternalLink(\'F\')" ion-fab><ion-icon name="logo-facebook"></ion-icon></button>\n      <button (click)="goToExternalLink(\'T\')" ion-fab><ion-icon name="logo-twitter"></ion-icon></button>\n      <button (click)="goToExternalLink(\'I\')" ion-fab><ion-icon name="logo-instagram"></ion-icon></button>\n      <button (click)="goToExternalLink(\'M\')" ion-fab><ion-icon name="ios-mail-outline"></ion-icon></button>\n    </ion-fab-list>\n  </ion-fab>\n</ion-content>\n'/*ion-inline-end:"/Users/damien/app/WT/src/pages/home/home.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_8__ionic_native_globalization__["a" /* Globalization */], __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__["a" /* InAppBrowser */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_globalization__["a" /* Globalization */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_globalization__["a" /* Globalization */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__["a" /* InAppBrowser */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__["a" /* InAppBrowser */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_3__providers_database_database__["a" /* DatabaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_database_database__["a" /* DatabaseProvider */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */]) === "function" && _h || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -390,7 +374,6 @@ var LangModalPage = /** @class */ (function () {
         this.flagList = __WEBPACK_IMPORTED_MODULE_3__app_app_settings__["a" /* appSettings */].LANGUAGE_LIST;
         storage.get('lang').then(function (val) {
             _this.flagSel = val;
-            alert('modal ' + val);
         });
     }
     LangModalPage.prototype.closeModal = function () {
@@ -405,9 +388,10 @@ var LangModalPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-lang-modal',template:/*ion-inline-start:"/Users/damien/app/WT/src/pages/lang-modal/lang-modal.html"*/'<ion-header>\n    <ion-toolbar color="primary">\n        <ion-title>{{\'LANG\'|translate}}</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only (click)="closeModal()">\n                <ion-icon ios="md-close" md="md-close"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n<ion-content class="flagContent" text-center>\n<div class="flagContainer">\n    <div *ngFor="let flag of flagList" (tap)="setLang(flag)" [ngClass]="{\'flagSelected\':flag===flagSel}">\n        <img [src]="\'assets/flag/\'+flag+\'.png\'">\n    </div>\n</div>\n<span>Author : http://www.freepik.com/</span>\n</ion-content>'/*ion-inline-end:"/Users/damien/app/WT/src/pages/lang-modal/lang-modal.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */]) === "function" && _c || Object])
     ], LangModalPage);
     return LangModalPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=lang-modal.js.map
