@@ -1,1 +1,107 @@
-webpackJsonp([1],{398:function(l,n,u){"use strict";function t(l){return o._21(0,[(l()(),o.Z(0,0,null,null,5,"div",[],null,[[null,"tap"]],function(l,n,u){var t=!0;if("tap"===n){t=!1!==l.component.setLang(l.context.$implicit)&&t}return t},null,null)),o.Y(1,278528,null,0,h.g,[o.p,o.q,o.j,o.A],{ngClass:[0,"ngClass"]},null),o._14(2,{flagSelected:0}),(l()(),o._19(-1,null,["\n        "])),(l()(),o.Z(4,0,null,null,0,"img",[],[[8,"src",4]],null,null,null,null)),(l()(),o._19(-1,null,["\n    "]))],function(l,n){l(n,1,0,l(n,2,0,n.context.$implicit===n.component.flagSel))},function(l,n){l(n,4,0,"assets/flag/"+n.context.$implicit+".png")})}function a(l){return o._21(0,[(l()(),o.Z(0,0,null,null,23,"ion-header",[],null,null,null,null,null)),o.Y(1,16384,null,0,Z.a,[k.a,o.j,o.z,[2,C.a]],null,null),(l()(),o._19(-1,null,["\n    "])),(l()(),o.Z(3,0,null,null,19,"ion-toolbar",[["class","toolbar"],["color","primary"]],[[2,"statusbar-padding",null]],null,null,j.b,j.a)),o.Y(4,49152,null,0,Y.a,[k.a,o.j,o.z],{color:[0,"color"]},null),(l()(),o._19(-1,3,["\n        "])),(l()(),o.Z(6,0,null,3,3,"ion-title",[],null,null,null,y.b,y.a)),o.Y(7,49152,null,0,A.a,[k.a,o.j,o.z,[2,Y.a],[2,L.a]],null,null),(l()(),o._19(8,0,["",""])),o._13(131072,x.a,[z.a,o.g]),(l()(),o._19(-1,3,["\n        "])),(l()(),o.Z(11,0,null,2,10,"ion-buttons",[["end",""]],null,null,null,null,null)),o.Y(12,16384,null,1,w.a,[k.a,o.j,o.z,[2,Y.a],[2,L.a]],null,null),o._17(603979776,1,{_buttons:1}),(l()(),o._19(-1,null,["\n            "])),(l()(),o.Z(15,0,null,null,5,"button",[["icon-only",""],["ion-button",""]],null,[[null,"click"]],function(l,n,u){var t=!0;if("click"===n){t=!1!==l.component.closeModal()&&t}return t},S.b,S.a)),o.Y(16,1097728,[[1,4]],0,M.a,[[8,""],k.a,o.j,o.z],null,null),(l()(),o._19(-1,0,["\n                "])),(l()(),o.Z(18,0,null,0,1,"ion-icon",[["ios","md-close"],["md","md-close"],["role","img"]],[[2,"hide",null]],null,null,null,null)),o.Y(19,147456,null,0,q.a,[k.a,o.j,o.z],{ios:[0,"ios"],md:[1,"md"]},null),(l()(),o._19(-1,0,["\n            "])),(l()(),o._19(-1,null,["\n        "])),(l()(),o._19(-1,3,["\n    "])),(l()(),o._19(-1,null,["\n"])),(l()(),o._19(-1,null,["\n"])),(l()(),o.Z(25,0,null,null,11,"ion-content",[["class","flagContent"],["text-center",""]],[[2,"statusbar-padding",null],[2,"has-refresher",null]],null,null,F.b,F.a)),o.Y(26,4374528,null,0,P.a,[k.a,X.a,G.a,o.j,o.z,N.a,O.a,o.u,[2,C.a],[2,$.a]],null,null),(l()(),o._19(-1,1,["\n"])),(l()(),o.Z(28,0,null,1,4,"div",[["class","flagContainer"]],null,null,null,null,null)),(l()(),o._19(-1,null,["\n    "])),(l()(),o.U(16777216,null,null,1,null,t)),o.Y(31,802816,null,0,h.h,[o.I,o.F,o.p],{ngForOf:[0,"ngForOf"]},null),(l()(),o._19(-1,null,["\n"])),(l()(),o._19(-1,1,["\n"])),(l()(),o.Z(34,0,null,1,1,"span",[],null,null,null,null,null)),(l()(),o._19(-1,null,["Author : http://www.freepik.com/"])),(l()(),o._19(-1,1,["\n"]))],function(l,n){var u=n.component;l(n,4,0,"primary");l(n,19,0,"md-close","md-close");l(n,31,0,u.flagList)},function(l,n){l(n,3,0,o._11(n,4)._sbPadding);l(n,8,0,o._20(n,8,0,o._11(n,9).transform("LANG")));l(n,18,0,o._11(n,19)._hidden);l(n,25,0,o._11(n,26).statusbarPadding,o._11(n,26)._hasRefresher)})}Object.defineProperty(n,"__esModule",{value:!0});var o=u(0),s=(u(1),u(98)),e=(u(29),u(266)),i=(u(159),function(){function l(l,n,u){var t=this;this.storage=l,this.translate=n,this.viewCtrl=u,this.flagList=e.a.LANGUAGE_LIST,l.get("lang").then(function(l){t.flagSel=l})}return l.prototype.closeModal=function(){this.viewCtrl.dismiss()},l.prototype.setLang=function(l){this.storage.set("lang",l),this.flagSel=l,this.translate.use(l)},l}()),r=function(){return function(){}}(),c=u(257),_=u(258),d=u(259),f=u(260),g=u(261),b=u(262),p=u(263),m=u(264),v=u(265),h=u(17),Z=u(100),k=u(2),C=u(6),j=u(402),Y=u(63),y=u(400),A=u(153),L=u(43),x=u(155),z=u(36),w=u(162),S=u(52),M=u(26),q=u(50),F=u(401),P=u(33),X=u(5),G=u(13),N=u(12),O=u(49),$=u(25),I=u(160),U=o.X({encapsulation:2,styles:[],data:{}}),E=o.V("page-lang-modal",i,function(l){return o._21(0,[(l()(),o.Z(0,0,null,null,1,"page-lang-modal",[],null,null,null,a,U)),o.Y(1,49152,null,0,i,[I.a,z.a,C.a],null,null)],null,null)},{},{},[]),J=u(22),R=u(64),T=u(65),V=u(67),W=u(66),B=u(99),D=u(156),H=u(51);u.d(n,"LangModalPageModuleNgFactory",function(){return K});var K=o.W(r,[],function(l){return o._7([o._8(512,o.i,o.S,[[8,[c.a,_.a,d.a,f.a,g.a,b.a,p.a,m.a,v.a,E]],[3,o.i],o.s]),o._8(4608,h.k,h.j,[o.r,[2,h.s]]),o._8(4608,J.k,J.k,[]),o._8(4608,J.c,J.c,[]),o._8(4608,R.b,R.a,[]),o._8(4608,T.a,T.b,[]),o._8(4608,V.b,V.a,[]),o._8(4608,W.b,W.a,[]),o._8(4608,z.a,z.a,[B.a,R.b,T.a,V.b,W.b,z.b,z.c]),o._8(512,h.b,h.b,[]),o._8(512,J.j,J.j,[]),o._8(512,J.d,J.d,[]),o._8(512,J.i,J.i,[]),o._8(512,D.a,D.a,[]),o._8(512,D.b,D.b,[]),o._8(512,s.a,s.a,[]),o._8(512,r,r,[]),o._8(256,H.a,i,[]),o._8(256,z.c,void 0,[]),o._8(256,z.b,void 0,[])])})},400:function(l,n,u){"use strict";function t(l){return a._21(2,[(l()(),a.Z(0,0,null,null,2,"div",[["class","toolbar-title"]],null,null,null,null,null)),a.Y(1,278528,null,0,o.g,[a.p,a.q,a.j,a.A],{klass:[0,"klass"],ngClass:[1,"ngClass"]},null),a._10(null,0)],function(l,n){l(n,1,0,"toolbar-title","toolbar-title-"+n.component._mode)},null)}u.d(n,"a",function(){return s}),n.b=t;var a=u(0),o=u(17),s=(u(2),a.X({encapsulation:2,styles:[],data:{}}))},401:function(l,n,u){"use strict";function t(l){return a._21(2,[a._17(402653184,1,{_fixedContent:0}),a._17(402653184,2,{_scrollContent:0}),(l()(),a.Z(2,0,[[1,0],["fixedContent",1]],null,1,"div",[["class","fixed-content"]],null,null,null,null,null)),a._10(null,0),(l()(),a.Z(4,0,[[2,0],["scrollContent",1]],null,1,"div",[["class","scroll-content"]],null,null,null,null,null)),a._10(null,1),a._10(null,2)],null,null)}u.d(n,"a",function(){return o}),n.b=t;var a=u(0),o=(u(2),u(5),u(13),u(49),u(6),u(25),a.X({encapsulation:2,styles:[],data:{}}))},402:function(l,n,u){"use strict";function t(l){return a._21(2,[(l()(),a.Z(0,0,null,null,1,"div",[["class","toolbar-background"]],null,null,null,null,null)),a.Y(1,278528,null,0,o.g,[a.p,a.q,a.j,a.A],{klass:[0,"klass"],ngClass:[1,"ngClass"]},null),a._10(null,0),a._10(null,1),a._10(null,2),(l()(),a.Z(5,0,null,null,2,"div",[["class","toolbar-content"]],null,null,null,null,null)),a.Y(6,278528,null,0,o.g,[a.p,a.q,a.j,a.A],{klass:[0,"klass"],ngClass:[1,"ngClass"]},null),a._10(null,3)],function(l,n){var u=n.component;l(n,1,0,"toolbar-background","toolbar-background-"+u._mode);l(n,6,0,"toolbar-content","toolbar-content-"+u._mode)},null)}u.d(n,"a",function(){return s}),n.b=t;var a=u(0),o=u(17),s=(u(2),a.X({encapsulation:2,styles:[],data:{}}))}});
+webpackJsonp([1],{
+
+/***/ 442:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LangModalPageModule", function() { return LangModalPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngx_translate_core__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lang_modal__ = __webpack_require__(445);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+var LangModalPageModule = /** @class */ (function () {
+    function LangModalPageModule() {
+    }
+    LangModalPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_3__lang_modal__["a" /* LangModalPage */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["n" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_3__lang_modal__["a" /* LangModalPage */]),
+                __WEBPACK_IMPORTED_MODULE_1__ngx_translate_core__["b" /* TranslateModule */].forChild()
+            ],
+        })
+    ], LangModalPageModule);
+    return LangModalPageModule;
+}());
+
+//# sourceMappingURL=lang-modal.module.js.map
+
+/***/ }),
+
+/***/ 445:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LangModalPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_app_settings__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(262);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/**
+ * Generated class for the LangModalPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var LangModalPage = /** @class */ (function () {
+    function LangModalPage(storage, translate, viewCtrl) {
+        var _this = this;
+        this.storage = storage;
+        this.translate = translate;
+        this.viewCtrl = viewCtrl;
+        this.flagList = __WEBPACK_IMPORTED_MODULE_3__app_app_settings__["a" /* appSettings */].LANGUAGE_LIST;
+        storage.get('lang').then(function (val) {
+            _this.flagSel = val;
+        });
+    }
+    LangModalPage.prototype.closeModal = function () {
+        this.viewCtrl.dismiss();
+    };
+    LangModalPage.prototype.setLang = function (lang) {
+        this.storage.set('lang', lang);
+        this.flagSel = lang;
+        this.translate.use(lang);
+    };
+    LangModalPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-lang-modal',template:/*ion-inline-start:"/Users/damien/app/WT/src/pages/lang-modal/lang-modal.html"*/'<ion-header>\n    <ion-toolbar color="primary">\n        <ion-title>{{\'LANG\'|translate}}</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only (click)="closeModal()">\n                <ion-icon ios="md-close" md="md-close"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n<ion-content class="flagContent" text-center>\n<div class="flagContainer">\n    <div *ngFor="let flag of flagList" (tap)="setLang(flag)" [ngClass]="{\'flagSelected\':flag===flagSel}">\n        <img [src]="\'assets/flag/\'+flag+\'.png\'">\n    </div>\n</div>\n<span>Author : http://www.freepik.com/</span>\n</ion-content>'/*ion-inline-end:"/Users/damien/app/WT/src/pages/lang-modal/lang-modal.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */]])
+    ], LangModalPage);
+    return LangModalPage;
+}());
+
+//# sourceMappingURL=lang-modal.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=1.js.map
