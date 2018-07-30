@@ -137,6 +137,7 @@ var HomePage = /** @class */ (function () {
                 }
                 else {
                     storage.get('lang').then(function (val) {
+                        alert('firstLaunchElse : ' + val);
                         translate.use(val);
                     });
                 }
@@ -146,6 +147,7 @@ var HomePage = /** @class */ (function () {
         });
     }
     HomePage.prototype.checkLanguage = function (lang) {
+        alert('checkLanguage ' + lang);
         var founded = false;
         for (var i = 0; i < __WEBPACK_IMPORTED_MODULE_9__app_app_settings__["a" /* appSettings */].LANGUAGE_LIST.length; i++) {
             if (__WEBPACK_IMPORTED_MODULE_9__app_app_settings__["a" /* appSettings */].LANGUAGE_LIST[i] === lang) {
@@ -374,6 +376,7 @@ var LangModalPage = /** @class */ (function () {
         this.flagList = __WEBPACK_IMPORTED_MODULE_3__app_app_settings__["a" /* appSettings */].LANGUAGE_LIST;
         storage.get('lang').then(function (val) {
             _this.flagSel = val;
+            alert('modal ' + val);
         });
     }
     LangModalPage.prototype.closeModal = function () {
