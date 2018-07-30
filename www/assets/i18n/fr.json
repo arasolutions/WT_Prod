@@ -19,7 +19,7 @@
   "SSCAT33": "Chambre",
   "CAT4": "Nourriture",
   "SSCAT40": "Restaurant",
-  "SSCAT41": "Assaisonement",
+  "SSCAT41": "Assaisonnement",
   "SSCAT42": "Boisson",
   "SSCAT43": "Plat",
   "SSCAT44": "Fruit et légume",
@@ -28,5 +28,7 @@
   "SSCAT51": "Activité",
   "SSCAT52": "Visite",
   "SSCAT53": "Monument",
-  "SSCAT54": "Religion"
+  "SSCAT54": "Religion",
+  "SLOGAN1": "Vous découvrez un nouveau pays mais vous ne parlez pas la langue?",
+  "SLOGAN2": "Word Trotter sera votre meilleur compagnon de voyage !"
 }

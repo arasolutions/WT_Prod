@@ -1,13 +1,13 @@
 webpackJsonp([3],{
 
-/***/ 112:
+/***/ 114:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DatabaseProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(154);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(201);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -64,7 +64,7 @@ var DatabaseProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 139:
+/***/ 141:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72,10 +72,13 @@ var DatabaseProvider = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_database_database__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pic_pic__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lang_modal_lang_modal__ = __webpack_require__(141);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__ = __webpack_require__(312);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_database_database__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pic_pic__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lang_modal_lang_modal__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_globalization__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_app_settings__ = __webpack_require__(211);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -92,6 +95,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
 /**
  * Generated class for the HomePage page.
  *
@@ -99,7 +105,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var HomePage = /** @class */ (function () {
-    function HomePage(iab, alertCtrl, translate, navCtrl, database, modalCtrl) {
+    function HomePage(globalization, storage, iab, alertCtrl, translate, navCtrl, database, modalCtrl) {
+        var _this = this;
+        this.globalization = globalization;
+        this.storage = storage;
         this.iab = iab;
         this.alertCtrl = alertCtrl;
         this.translate = translate;
@@ -108,10 +117,49 @@ var HomePage = /** @class */ (function () {
         this.modalCtrl = modalCtrl;
         this.loaded = false;
         this.picPage = __WEBPACK_IMPORTED_MODULE_4__pic_pic__["a" /* PicPage */];
-        translate.use(window.localStorage.getItem('WTLang') || 'fr');
-        //Besoin d'attendre que le constructeur de picData ait bien intégré toute les data
-        this.loadData();
+        storage.ready().then(function () {
+            storage.get('firstLaunch').then(function (val) {
+                console.log(val);
+                if (!val || val === null) {
+                    storage.set('firstLaunch', true);
+                    //détection de la langue
+                    if (window.cordova) {
+                        _this.globalization.getPreferredLanguage().then(function (result) {
+                            var res = result.value.split("-");
+                            //verif si existe dans liste des langues (interne)
+                            _this.checkLanguage(res[0]);
+                            alert(result.value + ' ' + res[0]);
+                        });
+                    }
+                    else {
+                        _this.checkLanguage(__WEBPACK_IMPORTED_MODULE_9__app_app_settings__["a" /* appSettings */].LANGUAGE_DEFAULT);
+                    }
+                }
+                else {
+                    storage.get('lang').then(function (val) {
+                        translate.use(val);
+                    });
+                }
+                //Besoin d'attendre que le constructeur de picData ait bien intégré toute les data
+                _this.loadData();
+            });
+        });
     }
+    HomePage.prototype.checkLanguage = function (lang) {
+        var founded = false;
+        for (var i = 0; i < __WEBPACK_IMPORTED_MODULE_9__app_app_settings__["a" /* appSettings */].LANGUAGE_LIST.length; i++) {
+            if (__WEBPACK_IMPORTED_MODULE_9__app_app_settings__["a" /* appSettings */].LANGUAGE_LIST[i] === lang) {
+                this.storage.set('lang', lang);
+                this.translate.use(lang);
+                founded = true;
+                break;
+            }
+        }
+        if (!founded) {
+            this.storage.set('lang', __WEBPACK_IMPORTED_MODULE_9__app_app_settings__["a" /* appSettings */].LANGUAGE_DEFAULT);
+            this.translate.use(__WEBPACK_IMPORTED_MODULE_9__app_app_settings__["a" /* appSettings */].LANGUAGE_DEFAULT);
+        }
+    };
     HomePage.prototype.loadData = function () {
         var _this = this;
         this.database.load()
@@ -163,9 +211,9 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/damien/app/WT/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>\n      <img class="logo" src="assets/logo.png">\n    </ion-title>\n    <ion-buttons end>\n      <button ion-button icon-only (click)="openModal()" color="light">\n        <ion-icon name="settings"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content text-center>\n<div *ngIf="!loaded" style="padding:50px"><ion-spinner></ion-spinner></div>\n<div *ngIf="loaded">\n  <ion-grid>\n  <!-- <ion-row>\n    <ion-col width-33 [navPush]="picPage" ><ion-icon name="heart"></ion-icon></ion-col>\n    <ion-col width-33><ion-icon [name]="myIcon"></ion-icon></ion-col>\n    <ion-col width-33>CAT 3</ion-col>\n  </ion-row> -->\n  <ion-row>\n  		<ion-col width-33 (tap)="goToPicPage(0)"><img [src]="cats[0].image"><div>{{cats[0].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(1)"><img [src]="cats[1].image"><div>{{cats[1].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(2)"><img [src]="cats[2].image"><div>{{cats[2].name|translate}}</div></ion-col>\n  </ion-row>\n  <ion-row>\n  		<ion-col width-33 (tap)="goToPicPage(3)"><img [src]="cats[3].image"><div>{{cats[3].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(4)"><img [src]="cats[4].image"><div>{{cats[4].name|translate}}</div></ion-col>\n      <ion-col width-33></ion-col>\n  		<!-- <ion-col width-33 [navPush]="achatPage" tappable><img src="assets/img/achat.png"><div>Achats intégrés</div></ion-col> -->\n  </ion-row>\n      <!-- <ion-list>\n      <button ion-item *ngFor="let pic of cats" (click)="openPage(p)">\n      {{pic.name}}\n      </button>\n    </ion-list> -->\n</ion-grid>\n\n</div>\n<div padding class="slogan">Vous découvrez un nouveau pays mais vous ne parlez pas la langue? <br><br>Word Trotter sera votre meilleur compagnon de voyage !</div>\n <ion-fab right bottom>\n    <button ion-fab color="primary"><ion-icon name="ios-at-outline"></ion-icon></button>\n    <ion-fab-list side="left">\n      <button (click)="goToExternalLink(\'F\')" ion-fab><ion-icon name="logo-facebook"></ion-icon></button>\n      <button (click)="goToExternalLink(\'T\')" ion-fab><ion-icon name="logo-twitter"></ion-icon></button>\n      <button (click)="goToExternalLink(\'I\')" ion-fab><ion-icon name="logo-instagram"></ion-icon></button>\n      <button (click)="goToExternalLink(\'M\')" ion-fab><ion-icon name="ios-mail-outline"></ion-icon></button>\n    </ion-fab-list>\n  </ion-fab>\n</ion-content>\n'/*ion-inline-end:"/Users/damien/app/WT/src/pages/home/home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"/Users/damien/app/WT/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>\n      <img class="logo" src="assets/logo.png">\n    </ion-title>\n    <ion-buttons end>\n      <button ion-button icon-only (click)="openModal()" color="light">\n        <ion-icon name="settings"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content text-center>\n<div *ngIf="!loaded" style="padding:50px"><ion-spinner></ion-spinner></div>\n<div *ngIf="loaded">\n  <ion-grid>\n  <!-- <ion-row>\n    <ion-col width-33 [navPush]="picPage" ><ion-icon name="heart"></ion-icon></ion-col>\n    <ion-col width-33><ion-icon [name]="myIcon"></ion-icon></ion-col>\n    <ion-col width-33>CAT 3</ion-col>\n  </ion-row> -->\n  <ion-row>\n  		<ion-col width-33 (tap)="goToPicPage(0)"><img [src]="cats[0].image"><div>{{cats[0].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(1)"><img [src]="cats[1].image"><div>{{cats[1].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(2)"><img [src]="cats[2].image"><div>{{cats[2].name|translate}}</div></ion-col>\n  </ion-row>\n  <ion-row>\n  		<ion-col width-33 (tap)="goToPicPage(3)"><img [src]="cats[3].image"><div>{{cats[3].name|translate}}</div></ion-col>\n  		<ion-col width-33 (tap)="goToPicPage(4)"><img [src]="cats[4].image"><div>{{cats[4].name|translate}}</div></ion-col>\n      <ion-col width-33></ion-col>\n  		<!-- <ion-col width-33 [navPush]="achatPage" tappable><img src="assets/img/achat.png"><div>Achats intégrés</div></ion-col> -->\n  </ion-row>\n      <!-- <ion-list>\n      <button ion-item *ngFor="let pic of cats" (click)="openPage(p)">\n      {{pic.name}}\n      </button>\n    </ion-list> -->\n</ion-grid>\n\n</div>\n<div padding class="slogan">{{\'SLOGAN1\' | translate}}<br><br>{{\'SLOGAN2\' | translate}}</div>\n <ion-fab right bottom>\n    <button ion-fab color="primary"><ion-icon name="ios-at-outline"></ion-icon></button>\n    <ion-fab-list side="left">\n      <button (click)="goToExternalLink(\'F\')" ion-fab><ion-icon name="logo-facebook"></ion-icon></button>\n      <button (click)="goToExternalLink(\'T\')" ion-fab><ion-icon name="logo-twitter"></ion-icon></button>\n      <button (click)="goToExternalLink(\'I\')" ion-fab><ion-icon name="logo-instagram"></ion-icon></button>\n      <button (click)="goToExternalLink(\'M\')" ion-fab><ion-icon name="ios-mail-outline"></ion-icon></button>\n    </ion-fab-list>\n  </ion-fab>\n</ion-content>\n'/*ion-inline-end:"/Users/damien/app/WT/src/pages/home/home.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__["a" /* InAppBrowser */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_8__ionic_native_globalization__["a" /* Globalization */], __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_in_app_browser__["a" /* InAppBrowser */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__providers_database_database__["a" /* DatabaseProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */]])
     ], HomePage);
     return HomePage;
 }());
@@ -174,14 +222,14 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 140:
+/***/ 142:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PicPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_database_database__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_database_database__ = __webpack_require__(114);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -285,7 +333,7 @@ var PicPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 141:
+/***/ 143:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -293,6 +341,8 @@ var PicPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_app_settings__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(115);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -305,6 +355,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 /**
  * Generated class for the LangModalPage page.
  *
@@ -312,18 +364,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var LangModalPage = /** @class */ (function () {
-    function LangModalPage(translate, nav, viewCtrl) {
+    function LangModalPage(storage, translate, viewCtrl) {
+        var _this = this;
+        this.storage = storage;
         this.translate = translate;
-        this.nav = nav;
         this.viewCtrl = viewCtrl;
-        this.flagList = ['fr', 'es', 'de', 'us', 'cn', 'gb', 'it', 'nl', 'in', 'ru', 'jp', 'kr', 'no', 'pt', 'br', 'se', 'fi'];
-        this.flagSel = window.localStorage.getItem('WTLang') || 'fr';
+        this.flagList = __WEBPACK_IMPORTED_MODULE_3__app_app_settings__["a" /* appSettings */].LANGUAGE_LIST;
+        storage.get('lang').then(function (val) {
+            _this.flagSel = val;
+        });
     }
     LangModalPage.prototype.closeModal = function () {
         this.viewCtrl.dismiss();
     };
     LangModalPage.prototype.setLang = function (lang) {
-        window.localStorage.setItem('WTLang', lang);
+        this.storage.set('lang', lang);
         this.flagSel = lang;
         this.translate.use(lang);
     };
@@ -331,16 +386,17 @@ var LangModalPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-lang-modal',template:/*ion-inline-start:"/Users/damien/app/WT/src/pages/lang-modal/lang-modal.html"*/'<ion-header>\n    <ion-toolbar color="primary">\n        <ion-title>{{\'LANG\'|translate}}</ion-title>\n        <ion-buttons end>\n            <button ion-button icon-only (click)="closeModal()">\n                <ion-icon ios="md-close" md="md-close"></ion-icon>\n            </button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n<ion-content class="flagContent" text-center>\n<div class="flagContainer">\n    <div *ngFor="let flag of flagList" (tap)="setLang(flag)" [ngClass]="{\'flagSelected\':flag===flagSel}">\n        <img [src]="\'assets/flag/\'+flag+\'.png\'">\n    </div>\n</div>\n<span>Author : http://www.freepik.com/</span>\n</ion-content>'/*ion-inline-end:"/Users/damien/app/WT/src/pages/lang-modal/lang-modal.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ngx_translate_core__["c" /* TranslateService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* ViewController */]) === "function" && _c || Object])
     ], LangModalPage);
     return LangModalPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=lang-modal.js.map
 
 /***/ }),
 
-/***/ 153:
+/***/ 154:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -353,24 +409,24 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 153;
+webpackEmptyAsyncContext.id = 154;
 
 /***/ }),
 
-/***/ 196:
+/***/ 197:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/home/home.module": [
-		437,
+		443,
 		2
 	],
 	"../pages/lang-modal/lang-modal.module": [
-		438,
+		444,
 		1
 	],
 	"../pages/pic/pic.module": [
-		439,
+		445,
 		0
 	]
 };
@@ -385,18 +441,32 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 196;
+webpackAsyncContext.id = 197;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 265:
+/***/ 211:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return appSettings; });
+var appSettings = {
+    LANGUAGE_LIST: ['fr', 'es', 'de', 'us', 'cn', 'en', 'it', 'nl', 'in', 'ru', 'jp', 'kr', 'no', 'pt', 'br', 'se', 'fi'],
+    //https://github.com/shadiabuhilal/lang-list/blob/master/data/languages.json
+    LANGUAGE_DEFAULT: 'en'
+};
+//# sourceMappingURL=app-settings.js.map
+
+/***/ }),
+
+/***/ 269:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(266);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(276);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -404,34 +474,38 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 272:
+/***/ 276:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export createTranslateLoader */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__ = __webpack_require__(251);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__ = __webpack_require__(252);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ngx_translate_core__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ngx_translate_http_loader__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_in_app_browser__ = __webpack_require__(312);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_component__ = __webpack_require__(338);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_home_home__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_pic_pic__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_lang_modal_lang_modal__ = __webpack_require__(141);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_database_database__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_ionic_img_viewer__ = __webpack_require__(339);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_globalization__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ngx_translate_core__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ngx_translate_http_loader__ = __webpack_require__(342);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_in_app_browser__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_storage__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__app_component__ = __webpack_require__(344);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_home_home__ = __webpack_require__(141);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_pic_pic__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_lang_modal_lang_modal__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_database_database__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_ionic_img_viewer__ = __webpack_require__(345);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -451,7 +525,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 function createTranslateLoader(http) {
-    return new __WEBPACK_IMPORTED_MODULE_8__ngx_translate_http_loader__["a" /* TranslateHttpLoader */](http, './assets/i18n/', '.json');
+    return new __WEBPACK_IMPORTED_MODULE_9__ngx_translate_http_loader__["a" /* TranslateHttpLoader */](http, './assets/i18n/', '.json');
 }
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -459,23 +533,23 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* MyApp */],
-                __WEBPACK_IMPORTED_MODULE_11__pages_home_home__["a" /* HomePage */],
-                __WEBPACK_IMPORTED_MODULE_12__pages_pic_pic__["a" /* PicPage */],
-                __WEBPACK_IMPORTED_MODULE_13__pages_lang_modal_lang_modal__["a" /* LangModalPage */]
+                __WEBPACK_IMPORTED_MODULE_12__app_component__["a" /* MyApp */],
+                __WEBPACK_IMPORTED_MODULE_13__pages_home_home__["a" /* HomePage */],
+                __WEBPACK_IMPORTED_MODULE_14__pages_pic_pic__["a" /* PicPage */],
+                __WEBPACK_IMPORTED_MODULE_15__pages_lang_modal_lang_modal__["a" /* LangModalPage */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["b" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_15_ionic_img_viewer__["a" /* IonicImageViewerModule */],
-                __WEBPACK_IMPORTED_MODULE_7__ngx_translate_core__["b" /* TranslateModule */].forRoot({
+                __WEBPACK_IMPORTED_MODULE_17_ionic_img_viewer__["a" /* IonicImageViewerModule */],
+                __WEBPACK_IMPORTED_MODULE_8__ngx_translate_core__["b" /* TranslateModule */].forRoot({
                     loader: {
-                        provide: __WEBPACK_IMPORTED_MODULE_7__ngx_translate_core__["a" /* TranslateLoader */],
+                        provide: __WEBPACK_IMPORTED_MODULE_8__ngx_translate_core__["a" /* TranslateLoader */],
                         useFactory: (createTranslateLoader),
                         deps: [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]]
                     }
                 }),
-                __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["m" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* MyApp */], {
+                __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["m" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_12__app_component__["a" /* MyApp */], {
                     backButtonText: '',
                     pageTransition: 'md-transition'
                 }, {
@@ -485,21 +559,23 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/pic/pic.module#PicPageModule', name: 'PicPage', segment: 'pic', priority: 'low', defaultHistory: [] }
                     ]
                 }),
+                __WEBPACK_IMPORTED_MODULE_11__ionic_storage__["a" /* IonicStorageModule */].forRoot({ name: '__wtdb' }),
                 __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* HttpModule */],
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["k" /* IonicApp */]],
             entryComponents: [
-                __WEBPACK_IMPORTED_MODULE_10__app_component__["a" /* MyApp */],
-                __WEBPACK_IMPORTED_MODULE_11__pages_home_home__["a" /* HomePage */],
-                __WEBPACK_IMPORTED_MODULE_12__pages_pic_pic__["a" /* PicPage */],
-                __WEBPACK_IMPORTED_MODULE_13__pages_lang_modal_lang_modal__["a" /* LangModalPage */]
+                __WEBPACK_IMPORTED_MODULE_12__app_component__["a" /* MyApp */],
+                __WEBPACK_IMPORTED_MODULE_13__pages_home_home__["a" /* HomePage */],
+                __WEBPACK_IMPORTED_MODULE_14__pages_pic_pic__["a" /* PicPage */],
+                __WEBPACK_IMPORTED_MODULE_15__pages_lang_modal_lang_modal__["a" /* LangModalPage */]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_6__ionic_native_status_bar__["a" /* StatusBar */],
+                __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_5__ionic_native_splash_screen__["a" /* SplashScreen */],
-                __WEBPACK_IMPORTED_MODULE_9__ionic_native_in_app_browser__["a" /* InAppBrowser */],
+                __WEBPACK_IMPORTED_MODULE_6__ionic_native_globalization__["a" /* Globalization */],
+                __WEBPACK_IMPORTED_MODULE_10__ionic_native_in_app_browser__["a" /* InAppBrowser */],
                 { provide: __WEBPACK_IMPORTED_MODULE_3__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["l" /* IonicErrorHandler */] },
-                __WEBPACK_IMPORTED_MODULE_14__providers_database_database__["a" /* DatabaseProvider */]
+                __WEBPACK_IMPORTED_MODULE_16__providers_database_database__["a" /* DatabaseProvider */]
             ]
         })
     ], AppModule);
@@ -510,17 +586,17 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 338:
+/***/ 344:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(252);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(251);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(255);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ngx_translate_core__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(141);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -569,5 +645,5 @@ var MyApp = /** @class */ (function () {
 
 /***/ })
 
-},[265]);
+},[269]);
 //# sourceMappingURL=main.js.map
